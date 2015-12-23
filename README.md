@@ -1,1 +1,0 @@
-generated blog files

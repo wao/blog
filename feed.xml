@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Think More</title>
+    <description>Personal thoughts and work log in software development.
+</description>
+    <link>http://wao.github.io/blog/</link>
+    <atom:link href="http://wao.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Wed, 23 Dec 2015 13:15:52 +0800</pubDate>
+    <lastBuildDate>Wed, 23 Dec 2015 13:15:52 +0800</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Paring Raboo Blueooth Mouse with Ubuntu 15.10</title>
+        <description>&lt;p&gt;Yesterday, I purchased a Rapoo Bluetooth Mouse 6010B and tried to work with my Ubuntu 15.10. Sadly, it can be paried, but ubuntu told me “Connection failed”. As a programmer knowning little about bluetooth, I used &lt;code class=&quot;highlighter-rouge&quot;&gt;hcidump&lt;/code&gt; to capture a log and found nothing. Ubuntu seems pair with mouse successful and after a bunch of SDP negotitation, disconnect with mouse with no obvious reason.&lt;/p&gt;
+
+&lt;p&gt;After that, I tried the mouse with my android phone, everything works perfect.&lt;/p&gt;
+
+&lt;p&gt;After Google a lot, someone mentions Ubuntu 15.10 has some problem of bluetooth with its Bluetooth GUI, suggests that command line may work. So I tried &lt;code class=&quot;highlighter-rouge&quot;&gt;bluetoothctl&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;
+scan on
+#Found the mac with your mouse here
+scan off
+pair 00:11:xx:xx  #Pair with your mouse
+connect 00:11:xx:xx 
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Everything goes OK. After that, I tried powerdown/poweron bluetooth mouse, everythings is ok.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 11 Dec 2015 18:36:29 +0800</pubDate>
+        <link>http://wao.github.io/blog/2015/12/11/Paring-Rabool-bluetooth-mouse-with-Ubuntu-15.10.html</link>
+        <guid isPermaLink="true">http://wao.github.io/blog/2015/12/11/Paring-Rabool-bluetooth-mouse-with-Ubuntu-15.10.html</guid>
+        
+        <category>Bluetooth</category>
+        
+        <category>Ubuntu</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Using long with std::inner_product</title>
+        <description>&lt;p&gt;Today, I have write a problem which using &lt;code class=&quot;highlighter-rouge&quot;&gt;std::inner_product&lt;/code&gt; to caculate inner product of two &lt;code class=&quot;highlighter-rouge&quot;&gt;std::vector&amp;lt;int&amp;gt;&lt;/code&gt;. The code is like followings:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;int msp( vector&amp;lt;int&amp;gt;&amp;amp; left, vector&amp;lt;int&amp;gt;&amp;amp; right )
+    return inner_product( left.begin(), left.end(), right.begin(), 0 );
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;However, I meet overflow problem. I have tried to change from &lt;code class=&quot;highlighter-rouge&quot;&gt;std::vector&amp;lt;int&amp;gt;&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;std::vector&amp;lt;long long int&amp;gt;&lt;/code&gt;, but it doesn’t work.&lt;/p&gt;
+
+&lt;p&gt;After several trials, I have found if I change 0 to &lt;code class=&quot;highlighter-rouge&quot;&gt;0L&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;0LL&lt;/code&gt;, the overflow problem is fixed. I have do some research, and, found that the prototype of &lt;code class=&quot;highlighter-rouge&quot;&gt;inner_product&lt;/code&gt; is like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;template&amp;lt; class InputIt1, class InputIt2, class T &amp;gt;
+T inner_product( InputIt1 first1, InputIt1 last1, InputIt2 first2, T value );
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;As you can see, the type T is determined by type of parameter &lt;code class=&quot;highlighter-rouge&quot;&gt;value&lt;/code&gt;, so to force &lt;code class=&quot;highlighter-rouge&quot;&gt;inner_product&lt;/code&gt; using &lt;code class=&quot;highlighter-rouge&quot;&gt;long&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;long long int&lt;/code&gt;, we must specify that type of value by using &lt;code class=&quot;highlighter-rouge&quot;&gt;0L&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;0LL&lt;/code&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;return inner_product( left.begin(), left.end(), right.begin(), 0LL );
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>Wed, 18 Mar 2015 18:36:29 +0800</pubDate>
+        <link>http://wao.github.io/blog/2015/03/18/Using-long-with-std-inner-product.html</link>
+        <guid isPermaLink="true">http://wao.github.io/blog/2015/03/18/Using-long-with-std-inner-product.html</guid>
+        
+        <category>C++</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Using androidannotation with M2E</title>
+        <description>&lt;p&gt;Install ADT&lt;/p&gt;
+
+&lt;p&gt;Install m2e-android: Android for Maven Eclipse Update Site:	http://rgladwell.github.io/m2e-android/updates/	
+It will also install m2e itself.&lt;/p&gt;
+
+&lt;p&gt;Install mvn-apt: Maven Integration for Eclipse JDT APT:	http://download.jboss.org/jbosstools/updates/m2e-extensions/m2e-apt&lt;/p&gt;
+
+&lt;p&gt;Create a maven android project.&lt;/p&gt;
+
+&lt;p&gt;Add following dependencies:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;org.androidannotations&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;androidannotations&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;3.2&amp;lt;/version&amp;gt;
+    &amp;lt;scope&amp;gt;provided&amp;lt;/scope&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&amp;lt;dependency&amp;gt;
+    &amp;lt;groupId&amp;gt;org.androidannotations&amp;lt;/groupId&amp;gt;
+    &amp;lt;artifactId&amp;gt;androidannotations-api&amp;lt;/artifactId&amp;gt;
+    &amp;lt;version&amp;gt;3.2&amp;lt;/version&amp;gt;
+&amp;lt;/dependency&amp;gt;	
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;And add following in build/pluginManager&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;     &amp;lt;plugin&amp;gt;
+        &amp;lt;artifactId&amp;gt;maven-compiler-plugin&amp;lt;/artifactId&amp;gt;
+        &amp;lt;version&amp;gt;3.1&amp;lt;/version&amp;gt;
+        &amp;lt;configuration&amp;gt;
+            &amp;lt;source&amp;gt;1.6&amp;lt;/source&amp;gt;
+            &amp;lt;target&amp;gt;1.6&amp;lt;/target&amp;gt;
+        &amp;lt;/configuration&amp;gt;
+    &amp;lt;/plugin&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Configure mvn-apt: Using delegated to mvn-processor-plugin. It is important, since default eclipse apt process is broken with m2e.&lt;/p&gt;
+
+</description>
+        <pubDate>Tue, 16 Dec 2014 00:00:00 +0800</pubDate>
+        <link>http://wao.github.io/blog/2014/12/16/using-androidannotations-with-m2e.html</link>
+        <guid isPermaLink="true">http://wao.github.io/blog/2014/12/16/using-androidannotations-with-m2e.html</guid>
+        
+        <category>Android</category>
+        
+        <category>Maven</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>如何在ubuntu 14.10下root GT-I9502 Samsung Galaxy S4 4.4.2 联通双卡版本</title>
+        <description>&lt;p&gt;最近,把自己的Galaxy S4升级到4.4.2，安装了Google Play Store和系统服务,系统环境是ubuntu 14.10.下面就是步骤.&lt;/p&gt;
+
+&lt;p&gt;下载GT-I9502 Kitkate 4.4.2的原厂升级包:可以从sammobile上下载&lt;/p&gt;
+
+&lt;p&gt;下载驱动:可以从samsung的官网下载kies,里面就有驱动.&lt;/p&gt;
+
+&lt;p&gt;下载chainfire的CF-AUTO-ROOT包.里面有为GT-I9502 4.4.2编译的版本.解开压缩文件,内含samsung的刷机程序odin&lt;/p&gt;
+
+&lt;p&gt;安装ADB工具&lt;/p&gt;
+
+&lt;p&gt;打开virtual box,使用xp的虚拟机,记住要选中usb下的EHCI. 可能需要安装virtualbox的extension包.&lt;/p&gt;
+
+&lt;p&gt;启动虚拟机,安装KIES&lt;/p&gt;
+
+&lt;p&gt;安装成功以后,发送CTRL-ALT-DEL给虚拟机,在task manager中关闭kietrayagent.exe这个程序,否则odin检测不到手机.&lt;/p&gt;
+
+&lt;p&gt;将原厂升级包和CF-AUTO-ROOT包还有odin都拷入虚拟机的桌面.这一步很重要,否则odin会报一个韩文的错.&lt;/p&gt;
+
+&lt;p&gt;启动odin,点击pda,选择原厂升级包，等待,直到odin有输出.&lt;/p&gt;
+
+&lt;p&gt;将手机进入烧机模式( 关机后,同时按 volumn down + home + power,然后再按volumn up),插入usb线,odin就会发现一个串口.如果没有发现,在virtualbox中选择usb设备中的samsung.
+点击odin中的start按扭,就可以了.&lt;/p&gt;
+
+&lt;p&gt;手机从新启动后,再烧入CF-AUTO-ROOT包,手机重启两次后,开机就可以看到supersu这个程序,root就成功了.&lt;/p&gt;
+
+&lt;p&gt;下面是安装gms程序:&lt;/p&gt;
+
+&lt;p&gt;从手机system目录下删除不用的程序,释放空间来安装gms包&lt;/p&gt;
+
+&lt;p&gt;下载gapps或pa_gapps包,然后将压缩包展开,将framework, priv-app, app, lib, etc相关目录中的东西手工拷贝到手机上的相关目录就可以了.&lt;/p&gt;
+
+</description>
+        <pubDate>Fri, 05 Dec 2014 00:00:00 +0800</pubDate>
+        <link>http://wao.github.io/blog/2014/12/05/how-to-root-gt-i9502-kitkate.html</link>
+        <guid isPermaLink="true">http://wao.github.io/blog/2014/12/05/how-to-root-gt-i9502-kitkate.html</guid>
+        
+        <category>Android</category>
+        
+        <category>Root</category>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
