@@ -6,9 +6,63 @@
 </description>
     <link>http://wao.github.io/blog/</link>
     <atom:link href="http://wao.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 23 Dec 2015 13:15:52 +0800</pubDate>
-    <lastBuildDate>Wed, 23 Dec 2015 13:15:52 +0800</lastBuildDate>
+    <pubDate>Tue, 29 Dec 2015 09:22:10 +0800</pubDate>
+    <lastBuildDate>Tue, 29 Dec 2015 09:22:10 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Install Ubuntu 15.10 in MSI GE62-2QD</title>
+        <description>&lt;p&gt;Recently, I bought a new MSI GE62 2QD Notebook which has an Intel i7-5700HQ and an Nvdia GTX960M. At first day I got it, I had trouble to install Ubuntu 15.10 on it. I even can’t boot up from LiveCD and enter installer GUI. I googled it and found some blogs about old model or old ubuntu version. I tried their advice and has no effective. After some reseach, I realized that the problem is caused by new Nvidia GTX960M. It is obvious that linux default driver for nvdia card, nouveau has big problem with it. Luckly, all the Intel platform notebook has an embed Intel Display card which Ubuntu support quite perfect. All I need to to is disable nouveau before LiveCD bootup.&lt;/p&gt;
+
+&lt;p&gt;Following the advice of &lt;a href=&quot;http://forums.debian.net/viewtopic.php?t=79797&quot;&gt;this article&lt;/a&gt;, I can launcher intaller and install Ubuntu 15.10. The following same procdure at my Ubuntu first boot phase and successfully boot system.&lt;/p&gt;
+
+&lt;p&gt;After that, modify file &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/default/grub&lt;/code&gt;, change line&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    GRUB_CMDLINE_LINUX=&quot;&quot; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;to&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    GRUB_CMDLINE_LINUX=&quot;nouveau.modeset=0&quot; 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;and run command&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    sudo update-grub
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;After that, I can enjoy my new notebook.&lt;/p&gt;
+
+&lt;p&gt;FYI, the method to disable nouveau is following steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;At the grub screen, press the up or down arrow keys to select the grub stanza/entry in question.&lt;/li&gt;
+  &lt;li&gt;Press the “E” key.&lt;/li&gt;
+  &lt;li&gt;An editor will open up that will allow you to temporarily change the grub options for the next boot.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Press the down arrow key and move the cursor to the line after the line with the kernel options. The line with the kernel options might look something like:&lt;/p&gt;
+
+    &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; linux   /boot/vmlinuz-3.2.0-2-486 root=UUID=1cfa3078-b27d-471a-a476-e948f947f058 ro  quiet
+&lt;/code&gt;&lt;/pre&gt;
+    &lt;/div&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Press the left/right arrow keys to position the cursor at the end of kernel options line.&lt;/li&gt;
+  &lt;li&gt;Type in &lt;code class=&quot;highlighter-rouge&quot;&gt;nouveau.modeset=0&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Press either the F10 key or Ctrl+X to start the boot process.&lt;/li&gt;
+&lt;/ol&gt;
+
+</description>
+        <pubDate>Fri, 11 Dec 2015 18:36:29 +0800</pubDate>
+        <link>http://wao.github.io/blog/2015/12/11/install-ubuntu-15.10-in-MSI-GE62-2QD.html</link>
+        <guid isPermaLink="true">http://wao.github.io/blog/2015/12/11/install-ubuntu-15.10-in-MSI-GE62-2QD.html</guid>
+        
+        <category>Ubuntu</category>
+        
+        
+      </item>
     
       <item>
         <title>Paring Raboo Blueooth Mouse with Ubuntu 15.10</title>

@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Think More</title>
-  <meta name="description" content="Personal thoughts and work log in software development.
-">
+  <title>Install Ubuntu 15.10 in MSI GE62-2QD</title>
+  <meta name="description" content="Recently, I bought a new MSI GE62 2QD Notebook which has an Intel i7-5700HQ and an Nvdia GTX960M. At first day I got it, I had trouble to install Ubuntu 15.1...">
 
   <link rel="stylesheet" href="/blog/css/main.css">
-  <link rel="canonical" href="http://wao.github.io/blog/tag/ubuntu.html">
+  <link rel="canonical" href="http://wao.github.io/blog/2015/12/11/install-ubuntu-15.10-in-MSI-GE62-2QD.html">
   <link rel="alternate" type="application/rss+xml" title="Think More" href="http://wao.github.io/blog/feed.xml">
 </head>
 
@@ -69,18 +68,73 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <h2>Ubuntu</h2>
-<ul>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <li><a href="/blog/2015/12/11/install-ubuntu-15.10-in-MSI-GE62-2QD.html">Install Ubuntu 15.10 in MSI GE62-2QD</a> (11 Dec 2015 | Tags: <a href="/blog/tag/ubuntu.html" rel="tag">Ubuntu</a>)</li>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Install Ubuntu 15.10 in MSI GE62-2QD</h1>
+    <p class="post-meta"><time datetime="2015-12-11T18:36:29+08:00" itemprop="datePublished">Dec 11, 2015</time></p>
+  </header>
 
-  <li><a href="/blog/2015/12/11/Paring-Rabool-bluetooth-mouse-with-Ubuntu-15.10.html">Paring Raboo Blueooth Mouse with Ubuntu 15.10</a> (11 Dec 2015 | Tags: <a href="/blog/tag/bluetooth.html" rel="tag">Bluetooth</a>, <a href="/blog/tag/ubuntu.html" rel="tag">Ubuntu</a>)</li>
+  <div class="post-content" itemprop="articleBody">
+    <p>Recently, I bought a new MSI GE62 2QD Notebook which has an Intel i7-5700HQ and an Nvdia GTX960M. At first day I got it, I had trouble to install Ubuntu 15.10 on it. I even can’t boot up from LiveCD and enter installer GUI. I googled it and found some blogs about old model or old ubuntu version. I tried their advice and has no effective. After some reseach, I realized that the problem is caused by new Nvidia GTX960M. It is obvious that linux default driver for nvdia card, nouveau has big problem with it. Luckly, all the Intel platform notebook has an embed Intel Display card which Ubuntu support quite perfect. All I need to to is disable nouveau before LiveCD bootup.</p>
 
-</ul>
+<p>Following the advice of <a href="http://forums.debian.net/viewtopic.php?t=79797">this article</a>, I can launcher intaller and install Ubuntu 15.10. The following same procdure at my Ubuntu first boot phase and successfully boot system.</p>
 
-<div id="tag-cloud">
-  <a href="/blog/tag/android.html" class="set-5">Android</a> <a href="/blog/tag/bluetooth.html" class="set-1">Bluetooth</a> <a href="/blog/tag/c%2B%2B.html" class="set-1">C++</a> <a href="/blog/tag/maven.html" class="set-1">Maven</a> <a href="/blog/tag/root.html" class="set-1">Root</a> <a href="/blog/tag/ubuntu.html" class="set-5">Ubuntu</a>
+<p>After that, modify file <code class="highlighter-rouge">/etc/default/grub</code>, change line</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    GRUB_CMDLINE_LINUX="" 
+</code></pre>
 </div>
+
+<p>to</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    GRUB_CMDLINE_LINUX="nouveau.modeset=0" 
+</code></pre>
+</div>
+
+<p>and run command</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    sudo update-grub
+</code></pre>
+</div>
+
+<p>After that, I can enjoy my new notebook.</p>
+
+<p>FYI, the method to disable nouveau is following steps:</p>
+
+<ol>
+  <li>At the grub screen, press the up or down arrow keys to select the grub stanza/entry in question.</li>
+  <li>Press the “E” key.</li>
+  <li>An editor will open up that will allow you to temporarily change the grub options for the next boot.</li>
+  <li>
+    <p>Press the down arrow key and move the cursor to the line after the line with the kernel options. The line with the kernel options might look something like:</p>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code> linux   /boot/vmlinuz-3.2.0-2-486 root=UUID=1cfa3078-b27d-471a-a476-e948f947f058 ro  quiet
+</code></pre>
+    </div>
+  </li>
+  <li>Press the left/right arrow keys to position the cursor at the end of kernel options line.</li>
+  <li>Type in <code class="highlighter-rouge">nouveau.modeset=0</code></li>
+  <li>Press either the F10 key or Ctrl+X to start the boot process.</li>
+</ol>
+
+
+  </div>
+
+  <div class="tag">
+      Tags: <a href="/blog/tag/ubuntu.html">Ubuntu</a> 
+  </div>
+
+  <script>
+var idcomments_acct = '60dddef396717235ffd5faf933f28e45';
+var idcomments_post_id;
+var idcomments_post_url;
+</script>
+<span id="IDCommentsPostTitle" style="display:none"></span>
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+
+
+</article>
 
       </div>
     </div>
