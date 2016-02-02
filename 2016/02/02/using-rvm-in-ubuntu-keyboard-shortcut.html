@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Think More</title>
-  <meta name="description" content="Personal thoughts and work log in software development.
-">
+  <title>Using rvm script in ubuntu keyboard shortcuts</title>
+  <meta name="description" content="Recently, I try to using ubuntu keyboard shortcuts to launch my ruby scripts.">
 
   <link rel="stylesheet" href="/blog/css/main.css">
-  <link rel="canonical" href="http://wao.github.io/blog/tag/androiddev.html">
+  <link rel="canonical" href="http://wao.github.io/blog/2016/02/02/using-rvm-in-ubuntu-keyboard-shortcut.html">
   <link rel="alternate" type="application/rss+xml" title="Think More" href="http://wao.github.io/blog/feed.xml">
 </head>
 
@@ -77,16 +76,36 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <h2>androiddev</h2>
-<ul>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <li><a href="/blog/2015/12/11/find-who-send-SIGKILL-to-my-process-in-android.html">Find who sent SIGKILL to my process on Android?</a> (11 Dec 2015 | Tags: <a href="/blog/tag/androiddev.html" rel="tag">androiddev</a>)</li>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Using rvm script in ubuntu keyboard shortcuts</h1>
+    <p class="post-meta"><time datetime="2016-02-02T00:00:00+08:00" itemprop="datePublished">Feb 2, 2016</time></p>
+  </header>
 
-</ul>
+  <div class="post-content" itemprop="articleBody">
+    <p>Recently, I try to using ubuntu keyboard shortcuts to launch my ruby scripts.</p>
 
-<div id="tag-cloud">
-  <a href="/blog/tag/android.html" class="set-5">Android</a> <a href="/blog/tag/bluetooth.html" class="set-1">Bluetooth</a> <a href="/blog/tag/c%2B%2B.html" class="set-1">C++</a> <a href="/blog/tag/maven.html" class="set-1">Maven</a> <a href="/blog/tag/root.html" class="set-1">Root</a> <a href="/blog/tag/ubuntu.html" class="set-5">Ubuntu</a> <a href="/blog/tag/androiddev.html" class="set-1">androiddev</a> <a href="/blog/tag/ruby.html" class="set-1">ruby</a> <a href="/blog/tag/rvm.html" class="set-1">rvm</a> <a href="/blog/tag/ubuntu.html" class="set-1">ubuntu</a>
-</div>
+<p>Surprisingly, I found the script seemed hadn’t been excuted at all. After some research, I realize that the root cause is that I write ruby and run it with rvm.</p>
+
+<p>To use rvm, some code line needed to be added into <code class="highlighter-rouge">.bashrc</code> or <code class="highlighter-rouge">.bash_profile</code>. However, scripts launched by keybord shortcuts or <code class="highlighter-rouge">ALT+F2</code> knows nothing about rvm. So your ruby script commonly failed due to require gem failures. For example, you use gem <code class="highlighter-rouge">main</code> and using <code class="highlighter-rouge">gem install main</code> in console. This gem is installed in rvm managered gem path. However, ruby launched by keyboard shortcuts only run system ruby and don’t have gem <code class="highlighter-rouge">main</code> installed. To fix this problem, I found that <code class="highlighter-rouge">rvm wrapper</code> can rescure us. I used following command <code class="highlighter-rouge">rvm wrapper 2.2.1@defrvm defrv</code>. This command will create a <code class="highlighter-rouge">defrvm_ruby</code> script. Then in keybord shutcuts using <code class="highlighter-rouge">path/to/defrvm_ruby path/to/your_script</code> instead of <code class="highlighter-rouge">path/to/your_script</code>. Then script can correctly find its dependencies.</p>
+
+  </div>
+
+  <div class="tag">
+      Tags: <a href="/blog/tag/ubuntu.html">ubuntu</a> <a href="/blog/tag/ruby.html">ruby</a> <a href="/blog/tag/rvm.html">rvm</a> 
+  </div>
+
+  <script>
+var idcomments_acct = '60dddef396717235ffd5faf933f28e45';
+var idcomments_post_id;
+var idcomments_post_url;
+</script>
+<span id="IDCommentsPostTitle" style="display:none"></span>
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+
+
+</article>
 
       </div>
     </div>

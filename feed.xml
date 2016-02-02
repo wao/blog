@@ -6,9 +6,30 @@
 </description>
     <link>http://wao.github.io/blog/</link>
     <atom:link href="http://wao.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 26 Jan 2016 16:21:25 +0800</pubDate>
-    <lastBuildDate>Tue, 26 Jan 2016 16:21:25 +0800</lastBuildDate>
+    <pubDate>Tue, 02 Feb 2016 17:31:46 +0800</pubDate>
+    <lastBuildDate>Tue, 02 Feb 2016 17:31:46 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Using rvm script in ubuntu keyboard shortcuts</title>
+        <description>&lt;p&gt;Recently, I try to using ubuntu keyboard shortcuts to launch my ruby scripts.&lt;/p&gt;
+
+&lt;p&gt;Surprisingly, I found the script seemed hadn’t been excuted at all. After some research, I realize that the root cause is that I write ruby and run it with rvm.&lt;/p&gt;
+
+&lt;p&gt;To use rvm, some code line needed to be added into &lt;code class=&quot;highlighter-rouge&quot;&gt;.bashrc&lt;/code&gt; or &lt;code class=&quot;highlighter-rouge&quot;&gt;.bash_profile&lt;/code&gt;. However, scripts launched by keybord shortcuts or &lt;code class=&quot;highlighter-rouge&quot;&gt;ALT+F2&lt;/code&gt; knows nothing about rvm. So your ruby script commonly failed due to require gem failures. For example, you use gem &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt; and using &lt;code class=&quot;highlighter-rouge&quot;&gt;gem install main&lt;/code&gt; in console. This gem is installed in rvm managered gem path. However, ruby launched by keyboard shortcuts only run system ruby and don’t have gem &lt;code class=&quot;highlighter-rouge&quot;&gt;main&lt;/code&gt; installed. To fix this problem, I found that &lt;code class=&quot;highlighter-rouge&quot;&gt;rvm wrapper&lt;/code&gt; can rescure us. I used following command &lt;code class=&quot;highlighter-rouge&quot;&gt;rvm wrapper 2.2.1@defrvm defrv&lt;/code&gt;. This command will create a &lt;code class=&quot;highlighter-rouge&quot;&gt;defrvm_ruby&lt;/code&gt; script. Then in keybord shutcuts using &lt;code class=&quot;highlighter-rouge&quot;&gt;path/to/defrvm_ruby path/to/your_script&lt;/code&gt; instead of &lt;code class=&quot;highlighter-rouge&quot;&gt;path/to/your_script&lt;/code&gt;. Then script can correctly find its dependencies.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 02 Feb 2016 00:00:00 +0800</pubDate>
+        <link>http://wao.github.io/blog/2016/02/02/using-rvm-in-ubuntu-keyboard-shortcut.html</link>
+        <guid isPermaLink="true">http://wao.github.io/blog/2016/02/02/using-rvm-in-ubuntu-keyboard-shortcut.html</guid>
+        
+        <category>ubuntu</category>
+        
+        <category>ruby</category>
+        
+        <category>rvm</category>
+        
+        
+      </item>
     
       <item>
         <title>Find who sent SIGKILL to my process on Android?</title>
