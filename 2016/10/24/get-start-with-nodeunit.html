@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Think More</title>
-  <meta name="description" content="Personal thoughts and work log in software development.
-">
+  <title>nodeunit初学记</title>
+  <meta name="description" content="Orginize Test Case">
 
   <link rel="stylesheet" href="/blog/css/main.css">
-  <link rel="canonical" href="http://wao.github.io/blog/tag/root.html">
+  <link rel="canonical" href="http://wao.github.io/blog/2016/10/24/get-start-with-nodeunit.html">
   <link rel="alternate" type="application/rss+xml" title="Think More" href="http://wao.github.io/blog/feed.xml">
 </head>
 
@@ -79,16 +78,69 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <h2>Root</h2>
-<ul>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <li><a href="/blog/2014/12/05/how-to-root-gt-i9502-kitkate.html">如何在ubuntu 14.10下root GT-I9502 Samsung Galaxy S4 4.4.2 联通双卡版本</a> (05 Dec 2014 | Tags: <a href="/blog/tag/android.html" rel="tag">Android</a>, <a href="/blog/tag/root.html" rel="tag">Root</a>)</li>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">nodeunit初学记</h1>
+    <p class="post-meta"><time datetime="2016-10-24T22:01:32+08:00" itemprop="datePublished">Oct 24, 2016</time></p>
+  </header>
 
-</ul>
+  <div class="post-content" itemprop="articleBody">
+    <h2 id="orginize-test-case">Orginize Test Case</h2>
 
-<div id="tag-cloud">
-  <a href="/blog/tag/android.html" class="set-5">Android</a> <a href="/blog/tag/bluetooth.html" class="set-1">Bluetooth</a> <a href="/blog/tag/c%2B%2B.html" class="set-1">C++</a> <a href="/blog/tag/maven.html" class="set-1">Maven</a> <a href="/blog/tag/root.html" class="set-1">Root</a> <a href="/blog/tag/ubuntu.html" class="set-5">Ubuntu</a> <a href="/blog/tag/androiddev.html" class="set-1">androiddev</a> <a href="/blog/tag/nodejs.html" class="set-5">nodejs</a> <a href="/blog/tag/ruby.html" class="set-1">ruby</a> <a href="/blog/tag/rvm.html" class="set-1">rvm</a> <a href="/blog/tag/ubuntu.html" class="set-1">ubuntu</a>
+<p>nodeunit没有suite的概念,但是有group的概念.就是说nodeunit exports可以包含一个对象,这个对象也会被认为是一个递归的测试集合.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">exports</span><span class="p">.</span><span class="nx">anothertest</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">test</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">test</span><span class="p">){</span>
+    <span class="p">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">subtest</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./subtest'</span><span class="p">);</span>
+</code></pre>
 </div>
+
+<p>通过这个特性和require相结合就可以较好的组织测试.</p>
+
+<h2 id="nodeunit">nodeunit缺省目录</h2>
+
+<p><code class="highlighter-rouge">nodeunit</code>命令如果没有参数的话就会寻找test目录下的js文件自动执行</p>
+
+<h2 id="using-npm-test">Using npm test</h2>
+
+<p>在文件package.json的scripts中添加 “test” : “nodeunit” 即可</p>
+
+<h2 id="nodeunit-1">nodeunit不立即退出的解决方法</h2>
+
+<p>nodeunit运行完全部测试后不会立即退出.根据<a href="http://stackoverflow.com/questions/25769825/is-there-a-way-to-know-that-nodeunit-has-finished-all-tests">stackoverflow的这篇文章</a>可以添加一个最后执行的test来解决这个问题</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nx">exports</span><span class="p">.</span><span class="nx">anothertest</span> <span class="o">=</span> <span class="p">{</span>
+<span class="c1">//Put a *LAST* test to clear all if needed:</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">last_test</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">test</span><span class="p">){</span>
+    <span class="c1">//do_clear_all_things_if_needed();</span>
+    <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">,</span> <span class="mi">500</span><span class="p">);</span> <span class="c1">// exit in 500 milli-seconds    </span>
+    <span class="nx">test</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span> 
+<span class="p">}</span>
+</code></pre>
+</div>
+
+
+  </div>
+
+  <div class="tag">
+      Tags: <a href="/blog/tag/nodejs.html">nodejs</a> 
+  </div>
+
+  <script>
+var idcomments_acct = '60dddef396717235ffd5faf933f28e45';
+var idcomments_post_id;
+var idcomments_post_url;
+</script>
+<span id="IDCommentsPostTitle" style="display:none"></span>
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+
+
+</article>
 
       </div>
     </div>

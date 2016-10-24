@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Think More</title>
-  <meta name="description" content="Personal thoughts and work log in software development.
-">
+  <title>关于javascript mvc framework的一些研究</title>
+  <meta name="description" content="关于javascript mvc framework的一些研究">
 
   <link rel="stylesheet" href="/blog/css/main.css">
-  <link rel="canonical" href="http://wao.github.io/blog/tag/root.html">
+  <link rel="canonical" href="http://wao.github.io/blog/2016/10/24/some-research-with-javascript-mvc-frameworks.html">
   <link rel="alternate" type="application/rss+xml" title="Think More" href="http://wao.github.io/blog/feed.xml">
 </head>
 
@@ -79,16 +78,46 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <h2>Root</h2>
-<ul>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <li><a href="/blog/2014/12/05/how-to-root-gt-i9502-kitkate.html">如何在ubuntu 14.10下root GT-I9502 Samsung Galaxy S4 4.4.2 联通双卡版本</a> (05 Dec 2014 | Tags: <a href="/blog/tag/android.html" rel="tag">Android</a>, <a href="/blog/tag/root.html" rel="tag">Root</a>)</li>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">关于javascript mvc framework的一些研究</h1>
+    <p class="post-meta"><time datetime="2016-10-24T21:26:33+08:00" itemprop="datePublished">Oct 24, 2016</time></p>
+  </header>
 
-</ul>
+  <div class="post-content" itemprop="articleBody">
+    <h2 id="javascript-mvc-framework">关于javascript mvc framework的一些研究</h2>
 
-<div id="tag-cloud">
-  <a href="/blog/tag/android.html" class="set-5">Android</a> <a href="/blog/tag/bluetooth.html" class="set-1">Bluetooth</a> <a href="/blog/tag/c%2B%2B.html" class="set-1">C++</a> <a href="/blog/tag/maven.html" class="set-1">Maven</a> <a href="/blog/tag/root.html" class="set-1">Root</a> <a href="/blog/tag/ubuntu.html" class="set-5">Ubuntu</a> <a href="/blog/tag/androiddev.html" class="set-1">androiddev</a> <a href="/blog/tag/nodejs.html" class="set-5">nodejs</a> <a href="/blog/tag/ruby.html" class="set-1">ruby</a> <a href="/blog/tag/rvm.html" class="set-1">rvm</a> <a href="/blog/tag/ubuntu.html" class="set-1">ubuntu</a>
-</div>
+<h3 id="twitter-bootstrap">Twitter Bootstrap兼容</h3>
+
+<p>只有backbone可以完美兼容bootstrap,其他的ember.js, react.js都由于要操作dom会和bootstrap的jquery冲突.所以react.js和ember.js都有开源项目来复制bootstrap的功能.</p>
+
+<p>长远来看,还是由bootstrap直接支持virtual dom才能彻底解决这个问题.</p>
+
+<h3 id="backbone-dead">Backbone dead?</h3>
+
+<p>backbone.js的社区已经不活跃了,本身backbone.js的也停止增加新功能了.</p>
+
+<h3 id="search-engine-and-backbonejs">Search Engine and Backbone.js</h3>
+
+<p>backbone.js对搜索引擎不友好,可能需要server side backbone.js来解决这个问题.</p>
+
+  </div>
+
+  <div class="tag">
+      Tags: <a href="/blog/tag/nodejs.html">nodejs</a> 
+  </div>
+
+  <script>
+var idcomments_acct = '60dddef396717235ffd5faf933f28e45';
+var idcomments_post_id;
+var idcomments_post_url;
+</script>
+<span id="IDCommentsPostTitle" style="display:none"></span>
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+
+
+</article>
 
       </div>
     </div>
