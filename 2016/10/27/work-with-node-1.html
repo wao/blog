@@ -92,10 +92,10 @@
   <li>使用 browserify 的 <code class="highlighter-rouge">-d</code> 选项生成source map,有助于调试</li>
   <li>使用 watchify 来自动调用browserify, 具体命令为 <code class="highlighter-rouge">watchify -d -o target.js source.js</code></li>
   <li>使用 express的middleware browserify-middleware 动态自动打包js</li>
-  <li>与bootstrap兼容的jquery打包方法是</li>
+  <li>根据<a href="http://stackoverflow.com/questions/24827964/browserify-with-twitter-bootstrap">这篇文章</a>与bootstrap兼容的jquery打包方法是</li>
 </ul>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">JQuery</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
 </code></pre>
 </div>
 
@@ -104,6 +104,7 @@
 <ul>
   <li>collection的任意一个子model.save()都会激发collection的sync事件</li>
   <li>model.save()会出PUT请求,同时要求返回更新后model的json</li>
+  <li>BackboneView在切换parent()以后,event绑定会丢失,可以用<code class="highlighter-rouge">this.delegateEvents()</code>重新绑定事件.参见<a href="http://blog.marionettejs.com/2015/02/12/understanding-the-event-hash/index.html">这篇文章</a></li>
 </ul>
 
 <h2 id="express">express</h2>

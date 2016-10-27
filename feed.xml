@@ -6,8 +6,8 @@
 </description>
     <link>http://wao.github.io/blog/</link>
     <atom:link href="http://wao.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 27 Oct 2016 22:48:53 +0800</pubDate>
-    <lastBuildDate>Thu, 27 Oct 2016 22:48:53 +0800</lastBuildDate>
+    <pubDate>Fri, 28 Oct 2016 06:48:21 +0800</pubDate>
+    <lastBuildDate>Fri, 28 Oct 2016 06:48:21 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
     
       <item>
@@ -103,10 +103,10 @@
   &lt;li&gt;使用 browserify 的 &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; 选项生成source map,有助于调试&lt;/li&gt;
   &lt;li&gt;使用 watchify 来自动调用browserify, 具体命令为 &lt;code class=&quot;highlighter-rouge&quot;&gt;watchify -d -o target.js source.js&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;使用 express的middleware browserify-middleware 动态自动打包js&lt;/li&gt;
-  &lt;li&gt;与bootstrap兼容的jquery打包方法是&lt;/li&gt;
+  &lt;li&gt;根据&lt;a href=&quot;http://stackoverflow.com/questions/24827964/browserify-with-twitter-bootstrap&quot;&gt;这篇文章&lt;/a&gt;与bootstrap兼容的jquery打包方法是&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;JQuery&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;jquery&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;jQuery&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;jquery&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -115,6 +115,7 @@
 &lt;ul&gt;
   &lt;li&gt;collection的任意一个子model.save()都会激发collection的sync事件&lt;/li&gt;
   &lt;li&gt;model.save()会出PUT请求,同时要求返回更新后model的json&lt;/li&gt;
+  &lt;li&gt;BackboneView在切换parent()以后,event绑定会丢失,可以用&lt;code class=&quot;highlighter-rouge&quot;&gt;this.delegateEvents()&lt;/code&gt;重新绑定事件.参见&lt;a href=&quot;http://blog.marionettejs.com/2015/02/12/understanding-the-event-hash/index.html&quot;&gt;这篇文章&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;express&quot;&gt;express&lt;/h2&gt;
