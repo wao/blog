@@ -6,9 +6,134 @@
 </description>
     <link>http://wao.github.io/blog/</link>
     <atom:link href="http://wao.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 24 Oct 2016 22:05:08 +0800</pubDate>
-    <lastBuildDate>Mon, 24 Oct 2016 22:05:08 +0800</lastBuildDate>
+    <pubDate>Thu, 27 Oct 2016 22:45:46 +0800</pubDate>
+    <lastBuildDate>Thu, 27 Oct 2016 22:45:46 +0800</lastBuildDate>
     <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>smali开发纪要1</title>
+        <description>&lt;h2 id=&quot;command-to-execute-smali&quot;&gt;Command to execute smali&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    adb shell dalvikvm -cp /path/to/your/smali_compiled.zip YouClassName
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;compile-command&quot;&gt;Compile Command&lt;/h2&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    java -jar smali.jar assemble -o classes.dex HelloWorld.smali
+    zip YouZip.zip classes.dex
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;helloworld-sample-smaili-code&quot;&gt;HelloWorld sample smaili code&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-smali&quot;&gt;.class public LHelloWorld;
+.super Ljava/lang/Object;
+.method public static main([Ljava/lang/String;)V
+    .locals 8
+    .prologue
+    sget-object v0, Ljava/lang/System;-&amp;gt;out:Ljava/io/PrintStream;
+    const-string v1, &quot;Hello World!&quot;
+    new-instance v2, Ljava/lang/StringBuilder;
+    invoke-direct {v2, v1}, Ljava/lang/StringBuilder;-&amp;gt;&amp;lt;init&amp;gt;(Ljava/lang/String;)V
+    const-string v1, &quot;Good Bye!&quot;
+    invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;-&amp;gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     move-result-object v2
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;-&amp;gt;toString()Ljava/lang/String;
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/io/PrintStream;-&amp;gt;println(Ljava/lang/String;)V
+    return-void
+.end method
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;code-sample-of-android-logv&quot;&gt;Code sample of android Log.v&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-smali&quot;&gt;.method public static varargs d(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
+    .locals 11
+
+    .prologue
+    .line 296
+
+    const-string v3, &quot;YANGCHEN:&quot;
+
+    new-instance v6, Ljava/lang/StringBuilder;
+    invoke-direct {v6,v3}, Ljava/lang/StringBuilder;-&amp;gt;&amp;lt;init&amp;gt;(Ljava/lang/String;)V
+
+    .line 297
+    if-nez p2, :cond_2
+    invoke-virtual {v6,p1}, Ljava/lang/StringBuilder;-&amp;gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v6
+
+    :goto_0
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;-&amp;gt;toString()Ljava/lang/String;
+    move-result-object v4
+
+
+  invoke-static {p0, v4}, Landroid/util/Log;-&amp;gt;v(Ljava/lang/String;Ljava/lang/String;)I 
+    return-void
+
+    .line 297
+    :cond_2
+    invoke-static {p1, p2}, Ljava/lang/String;-&amp;gt;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v1
+    invoke-virtual {v6,v1}, Ljava/lang/StringBuilder;-&amp;gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v6
+    goto :goto_0
+.end method
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;变参函数最后一个参数是 Object[] 类型,可以直接传给String.format使用.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 27 Oct 2016 22:34:05 +0800</pubDate>
+        <link>http://wao.github.io/blog/2016/10/27/smali-tips-1.html</link>
+        <guid isPermaLink="true">http://wao.github.io/blog/2016/10/27/smali-tips-1.html</guid>
+        
+        <category>androiddev</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Node经验记录1</title>
+        <description>&lt;h2 id=&quot;browserifyclientjs&quot;&gt;使用browserify来打包client端js&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用 browserify 的 &lt;code class=&quot;highlighter-rouge&quot;&gt;-d&lt;/code&gt; 选项生成source map,有助于调试&lt;/li&gt;
+  &lt;li&gt;使用 watchify 来自动调用browserify, 具体命令为 &lt;code class=&quot;highlighter-rouge&quot;&gt;watchify -d -o target.js source.js&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;使用 express的middleware browserify-middleware 动态自动打包js&lt;/li&gt;
+  &lt;li&gt;与bootstrap兼容的jquery打包方法是&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;JQuery&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&#39;jquery&#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;backbone&quot;&gt;backbone&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;collection的任意一个子model.save()都会激发collection的sync事件&lt;/li&gt;
+  &lt;li&gt;model.save()会出PUT请求,同时要求返回更新后model的json&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;express&quot;&gt;express&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;res.json()用于发送json&lt;/li&gt;
+  &lt;li&gt;req.params.xxx 用于获取参数&lt;/li&gt;
+  &lt;li&gt;req.body用于获取传入的值&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Thu, 27 Oct 2016 22:30:16 +0800</pubDate>
+        <link>http://wao.github.io/blog/2016/10/27/work-with-node-1.html</link>
+        <guid isPermaLink="true">http://wao.github.io/blog/2016/10/27/work-with-node-1.html</guid>
+        
+        <category>nodejs</category>
+        
+        
+      </item>
     
       <item>
         <title>nodeunit初学记</title>
@@ -320,51 +445,6 @@ It will also install m2e itself.&lt;/p&gt;
         <category>Android</category>
         
         <category>Maven</category>
-        
-        
-      </item>
-    
-      <item>
-        <title>如何在ubuntu 14.10下root GT-I9502 Samsung Galaxy S4 4.4.2 联通双卡版本</title>
-        <description>&lt;p&gt;最近,把自己的Galaxy S4升级到4.4.2，安装了Google Play Store和系统服务,系统环境是ubuntu 14.10.下面就是步骤.&lt;/p&gt;
-
-&lt;p&gt;下载GT-I9502 Kitkate 4.4.2的原厂升级包:可以从sammobile上下载&lt;/p&gt;
-
-&lt;p&gt;下载驱动:可以从samsung的官网下载kies,里面就有驱动.&lt;/p&gt;
-
-&lt;p&gt;下载chainfire的CF-AUTO-ROOT包.里面有为GT-I9502 4.4.2编译的版本.解开压缩文件,内含samsung的刷机程序odin&lt;/p&gt;
-
-&lt;p&gt;安装ADB工具&lt;/p&gt;
-
-&lt;p&gt;打开virtual box,使用xp的虚拟机,记住要选中usb下的EHCI. 可能需要安装virtualbox的extension包.&lt;/p&gt;
-
-&lt;p&gt;启动虚拟机,安装KIES&lt;/p&gt;
-
-&lt;p&gt;安装成功以后,发送CTRL-ALT-DEL给虚拟机,在task manager中关闭kietrayagent.exe这个程序,否则odin检测不到手机.&lt;/p&gt;
-
-&lt;p&gt;将原厂升级包和CF-AUTO-ROOT包还有odin都拷入虚拟机的桌面.这一步很重要,否则odin会报一个韩文的错.&lt;/p&gt;
-
-&lt;p&gt;启动odin,点击pda,选择原厂升级包，等待,直到odin有输出.&lt;/p&gt;
-
-&lt;p&gt;将手机进入烧机模式( 关机后,同时按 volumn down + home + power,然后再按volumn up),插入usb线,odin就会发现一个串口.如果没有发现,在virtualbox中选择usb设备中的samsung.
-点击odin中的start按扭,就可以了.&lt;/p&gt;
-
-&lt;p&gt;手机从新启动后,再烧入CF-AUTO-ROOT包,手机重启两次后,开机就可以看到supersu这个程序,root就成功了.&lt;/p&gt;
-
-&lt;p&gt;下面是安装gms程序:&lt;/p&gt;
-
-&lt;p&gt;从手机system目录下删除不用的程序,释放空间来安装gms包&lt;/p&gt;
-
-&lt;p&gt;下载gapps或pa_gapps包,然后将压缩包展开,将framework, priv-app, app, lib, etc相关目录中的东西手工拷贝到手机上的相关目录就可以了.&lt;/p&gt;
-
-</description>
-        <pubDate>Fri, 05 Dec 2014 00:00:00 +0800</pubDate>
-        <link>http://wao.github.io/blog/2014/12/05/how-to-root-gt-i9502-kitkate.html</link>
-        <guid isPermaLink="true">http://wao.github.io/blog/2014/12/05/how-to-root-gt-i9502-kitkate.html</guid>
-        
-        <category>Android</category>
-        
-        <category>Root</category>
         
         
       </item>

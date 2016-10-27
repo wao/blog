@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Think More</title>
-  <meta name="description" content="Personal thoughts and work log in software development.
-">
+  <title>smali开发纪要1</title>
+  <meta name="description" content="Command to execute smali">
 
   <link rel="stylesheet" href="/blog/css/main.css">
-  <link rel="canonical" href="http://wao.github.io/blog/tag/ruby.html">
+  <link rel="canonical" href="http://wao.github.io/blog/2016/10/27/smali-tips-1.html">
   <link rel="alternate" type="application/rss+xml" title="Think More" href="http://wao.github.io/blog/feed.xml">
 </head>
 
@@ -79,16 +78,104 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <h2>ruby</h2>
-<ul>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <li><a href="/blog/2016/02/02/using-rvm-in-ubuntu-keyboard-shortcut.html">Using rvm script in ubuntu keyboard shortcuts</a> (02 Feb 2016 | Tags: <a href="/blog/tag/ubuntu.html" rel="tag">ubuntu</a>, <a href="/blog/tag/ruby.html" rel="tag">ruby</a>, <a href="/blog/tag/rvm.html" rel="tag">rvm</a>)</li>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">smali开发纪要1</h1>
+    <p class="post-meta"><time datetime="2016-10-27T22:34:05+08:00" itemprop="datePublished">Oct 27, 2016</time></p>
+  </header>
 
-</ul>
+  <div class="post-content" itemprop="articleBody">
+    <h2 id="command-to-execute-smali">Command to execute smali</h2>
 
-<div id="tag-cloud">
-  <a href="/blog/tag/android.html" class="set-3">Android</a> <a href="/blog/tag/bluetooth.html" class="set-1">Bluetooth</a> <a href="/blog/tag/c%2B%2B.html" class="set-1">C++</a> <a href="/blog/tag/maven.html" class="set-1">Maven</a> <a href="/blog/tag/root.html" class="set-1">Root</a> <a href="/blog/tag/ubuntu.html" class="set-3">Ubuntu</a> <a href="/blog/tag/androiddev.html" class="set-3">androiddev</a> <a href="/blog/tag/nodejs.html" class="set-5">nodejs</a> <a href="/blog/tag/ruby.html" class="set-1">ruby</a> <a href="/blog/tag/rvm.html" class="set-1">rvm</a> <a href="/blog/tag/ubuntu.html" class="set-1">ubuntu</a>
+<div class="highlighter-rouge"><pre class="highlight"><code>    adb shell dalvikvm -cp /path/to/your/smali_compiled.zip YouClassName
+</code></pre>
 </div>
+
+<h2 id="compile-command">Compile Command</h2>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>    java -jar smali.jar assemble -o classes.dex HelloWorld.smali
+    zip YouZip.zip classes.dex
+</code></pre>
+</div>
+
+<h2 id="helloworld-sample-smaili-code">HelloWorld sample smaili code</h2>
+
+<pre><code class="language-smali">.class public LHelloWorld;
+.super Ljava/lang/Object;
+.method public static main([Ljava/lang/String;)V
+    .locals 8
+    .prologue
+    sget-object v0, Ljava/lang/System;-&gt;out:Ljava/io/PrintStream;
+    const-string v1, "Hello World!"
+    new-instance v2, Ljava/lang/StringBuilder;
+    invoke-direct {v2, v1}, Ljava/lang/StringBuilder;-&gt;&lt;init&gt;(Ljava/lang/String;)V
+    const-string v1, "Good Bye!"
+    invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+     move-result-object v2
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;-&gt;toString()Ljava/lang/String;
+    move-result-object v1
+
+    invoke-virtual {v0, v1}, Ljava/io/PrintStream;-&gt;println(Ljava/lang/String;)V
+    return-void
+.end method
+</code></pre>
+
+<h2 id="code-sample-of-android-logv">Code sample of android Log.v</h2>
+
+<pre><code class="language-smali">.method public static varargs d(Ljava/lang/String;Ljava/lang/String;[Ljava/lang/Object;)V
+    .locals 11
+
+    .prologue
+    .line 296
+
+    const-string v3, "YANGCHEN:"
+
+    new-instance v6, Ljava/lang/StringBuilder;
+    invoke-direct {v6,v3}, Ljava/lang/StringBuilder;-&gt;&lt;init&gt;(Ljava/lang/String;)V
+
+    .line 297
+    if-nez p2, :cond_2
+    invoke-virtual {v6,p1}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v6
+
+    :goto_0
+    invoke-virtual {v6}, Ljava/lang/StringBuilder;-&gt;toString()Ljava/lang/String;
+    move-result-object v4
+
+
+  invoke-static {p0, v4}, Landroid/util/Log;-&gt;v(Ljava/lang/String;Ljava/lang/String;)I 
+    return-void
+
+    .line 297
+    :cond_2
+    invoke-static {p1, p2}, Ljava/lang/String;-&gt;format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
+
+    move-result-object v1
+    invoke-virtual {v6,v1}, Ljava/lang/StringBuilder;-&gt;append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v6
+    goto :goto_0
+.end method
+</code></pre>
+
+<p>变参函数最后一个参数是 Object[] 类型,可以直接传给String.format使用.</p>
+
+  </div>
+
+  <div class="tag">
+      Tags: <a href="/blog/tag/androiddev.html">androiddev</a> 
+  </div>
+
+  <script>
+var idcomments_acct = '60dddef396717235ffd5faf933f28e45';
+var idcomments_post_id;
+var idcomments_post_url;
+</script>
+<span id="IDCommentsPostTitle" style="display:none"></span>
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+
+
+</article>
 
       </div>
     </div>

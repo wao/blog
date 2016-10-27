@@ -6,12 +6,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Think More</title>
-  <meta name="description" content="Personal thoughts and work log in software development.
-">
+  <title>Node经验记录1</title>
+  <meta name="description" content="使用browserify来打包client端js">
 
   <link rel="stylesheet" href="/blog/css/main.css">
-  <link rel="canonical" href="http://wao.github.io/blog/tag/ruby.html">
+  <link rel="canonical" href="http://wao.github.io/blog/2016/10/27/work-with-node-1.html">
   <link rel="alternate" type="application/rss+xml" title="Think More" href="http://wao.github.io/blog/feed.xml">
 </head>
 
@@ -79,16 +78,59 @@
 
     <div class="page-content">
       <div class="wrapper">
-        <h2>ruby</h2>
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Node经验记录1</h1>
+    <p class="post-meta"><time datetime="2016-10-27T22:30:16+08:00" itemprop="datePublished">Oct 27, 2016</time></p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    <h2 id="browserifyclientjs">使用browserify来打包client端js</h2>
+
 <ul>
-
-  <li><a href="/blog/2016/02/02/using-rvm-in-ubuntu-keyboard-shortcut.html">Using rvm script in ubuntu keyboard shortcuts</a> (02 Feb 2016 | Tags: <a href="/blog/tag/ubuntu.html" rel="tag">ubuntu</a>, <a href="/blog/tag/ruby.html" rel="tag">ruby</a>, <a href="/blog/tag/rvm.html" rel="tag">rvm</a>)</li>
-
+  <li>使用 browserify 的 <code class="highlighter-rouge">-d</code> 选项生成source map,有助于调试</li>
+  <li>使用 watchify 来自动调用browserify, 具体命令为 <code class="highlighter-rouge">watchify -d -o target.js source.js</code></li>
+  <li>使用 express的middleware browserify-middleware 动态自动打包js</li>
+  <li>与bootstrap兼容的jquery打包方法是</li>
 </ul>
 
-<div id="tag-cloud">
-  <a href="/blog/tag/android.html" class="set-3">Android</a> <a href="/blog/tag/bluetooth.html" class="set-1">Bluetooth</a> <a href="/blog/tag/c%2B%2B.html" class="set-1">C++</a> <a href="/blog/tag/maven.html" class="set-1">Maven</a> <a href="/blog/tag/root.html" class="set-1">Root</a> <a href="/blog/tag/ubuntu.html" class="set-3">Ubuntu</a> <a href="/blog/tag/androiddev.html" class="set-3">androiddev</a> <a href="/blog/tag/nodejs.html" class="set-5">nodejs</a> <a href="/blog/tag/ruby.html" class="set-1">ruby</a> <a href="/blog/tag/rvm.html" class="set-1">rvm</a> <a href="/blog/tag/ubuntu.html" class="set-1">ubuntu</a>
+<div class="highlighter-rouge"><pre class="highlight"><code>    <span class="nb">window</span><span class="p">.</span><span class="nx">$</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">JQuery</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'jquery'</span><span class="p">);</span>
+</code></pre>
 </div>
+
+<h2 id="backbone">backbone</h2>
+
+<ul>
+  <li>collection的任意一个子model.save()都会激发collection的sync事件</li>
+  <li>model.save()会出PUT请求,同时要求返回更新后model的json</li>
+</ul>
+
+<h2 id="express">express</h2>
+
+<ul>
+  <li>res.json()用于发送json</li>
+  <li>req.params.xxx 用于获取参数</li>
+  <li>req.body用于获取传入的值</li>
+</ul>
+
+
+  </div>
+
+  <div class="tag">
+      Tags: <a href="/blog/tag/nodejs.html">nodejs</a> 
+  </div>
+
+  <script>
+var idcomments_acct = '60dddef396717235ffd5faf933f28e45';
+var idcomments_post_id;
+var idcomments_post_url;
+</script>
+<span id="IDCommentsPostTitle" style="display:none"></span>
+<script type='text/javascript' src='http://www.intensedebate.com/js/genericCommentWrapperV2.js'></script>
+
+
+</article>
 
       </div>
     </div>
